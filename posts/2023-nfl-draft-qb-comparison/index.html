@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jack Shaw">
-<meta name="dcterms.date" content="2024-04-01">
+<meta name="dcterms.date" content="2024-05-04">
 
 <title>Jack Shaw’s Sports Data Site - Unleashing Arm Talent: A Comparison of 2024 Rookie Quarterbacks and Their Predecessors</title>
 <style>
@@ -149,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">The Myth of Mahomes: A Closer Look at the NFL’s Golden Boy</h1>
+      <h1 class="title">Unleashing Arm Talent: A Comparison of 2024 Rookie Quarterbacks and Their Predecessors</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Sports</div>
                 <div class="quarto-category">Football</div>
@@ -171,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 1, 2024</p>
+        <p class="date">May 4, 2024</p>
       </div>
     </div>
     
@@ -190,62 +190,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<p><img src="calebwilliams.jpg" class="img-fluid"></p>
+<p>In the high-stakes world of professional football, the quarterback position is king. With the 2024 NFL Draft ushering in a new wave of talent, football fans are looking forward to the debuts of six first-round quarterbacks. But how do these rookies compare to their more experienced predecessors? Let’s look at the data to see what’s going on with these bright young quarterbacks and their more established rivals.</p>
+<p><strong>Yards per attempt: Measuring passing efficiency</strong></p>
+<p>Yards per attempt is a measure of a quarterback’s passing efficiency, defining the balance between gaining large yardage and reducing interception risk. When we compare the rookie quarterbacks’ yards per attempt to those of their predecessors, interesting trends emerge. From Michael Penix Jr.’s explosive downfield passing to JJ McCarthy’s surgical perfection, each rookie has a unique flair on the field. How do these newbies compare to seasoned veterans like Russell Wilson and Kirk Cousins in this crucial facet of quarterback performance?</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>QBStats<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"QBStats.csv"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>team_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Bears"</span> <span class="ot">=</span> <span class="st">"#0B162A"</span>, <span class="st">"Broncos"</span> <span class="ot">=</span> <span class="st">"#FB4F14"</span>, <span class="st">"Vikings"</span> <span class="ot">=</span> <span class="st">"#4F2683"</span>,<span class="st">"Commanders"</span> <span class="ot">=</span> <span class="st">"#5A1414"</span>, <span class="st">"Falcons"</span> <span class="ot">=</span> <span class="st">"#A71930"</span>, <span class="st">"Patriots"</span><span class="ot">=</span> <span class="st">"#B0B7BC"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Player, <span class="st">`</span><span class="at">Yards/Attempt</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Yards/Attempt</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Team/School</span><span class="st">`</span>), <span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> team_colors) <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Yards per Attempt Comparison"</span>, </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Examining Yards per Attempt Across Quarterbacks and Teams"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Quarterback"</span>, </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Yards per Attempt"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Sports Reference | By: Jack Shaw"</span>) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
+</div>
+<p>The final chart examines yards per attempt across the board. Here, Caleb Williams and Bo Nix shine, suggesting that their play style not only emphasizes accuracy but also an ability to drive the ball downfield. Such attributes can translate into explosive plays, which are key components of winning games in the NFL.</p>
+<p><strong>Completion Percentage: A Measure of Accuracy</strong></p>
+<p>Elite quarterbacks are known for their accuracy, and their completion % reflects their ability to deliver accurate throws to their intended targets. As we compare the rookie quarterbacks’ completion percentages to those of their predecessors, we discover surprising trends. How do newbies Caleb Williams and Jayden Daniels stack up against seasoned veterans Justin Fields and Sam Howell in terms of accuracy?</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>QBStats<span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"QBStats.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Player, <span class="st">`</span><span class="at">Completion %</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Completion %</span><span class="st">`</span>, <span class="at">group =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Team/School</span><span class="st">`</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Player, <span class="st">`</span><span class="at">Completion %</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">Completion %</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Team/School</span><span class="st">`</span>), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> team_colors) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Completion Percentage Comparison"</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Analyzing Completion Percentage Across Quarterbacks"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Quarterback"</span>, </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Completion Percentage (%)"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Sports Reference | By: Jack Shaw"</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 12 Columns: 17
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr  (7): Player, Team/School, Conference, Rush Attempts, Rush Yards, Rush A...
-dbl (10): Games, Completions, Attempts, Completion %, Yards, Yards/Attempt, ...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>team_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Bears"</span> <span class="ot">=</span> <span class="st">"#0B162A"</span>, <span class="st">"Broncos"</span> <span class="ot">=</span> <span class="st">"#FB4F14"</span>, <span class="st">"Vikings"</span> <span class="ot">=</span> <span class="st">"#4F2683"</span>,<span class="st">"Commanders"</span> <span class="ot">=</span> <span class="st">"#5A1414"</span>, <span class="st">"Falcons"</span> <span class="ot">=</span> <span class="st">"#A71930"</span>, <span class="st">"Patriots"</span><span class="ot">=</span> <span class="st">"#B0B7BC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
+</div>
+<p>The trend line in this chart offers a straightforward visual of completion percentage across quarterbacks. The rookies, particularly JJ McCarthy and Bo Nix, demonstrate high completion percentages, which are indicative of accuracy and possibly a quick adaptation to the NFL’s demands, an essential trait for success in professional leagues.</p>
+<p><strong>Comparing Quarterback Ratings: Assessing Overall Performance</strong></p>
+<p>Quarterback rating provides a thorough assessment of a quarterback’s performance, taking into account metrics such as passing efficiency, touchdown-to-interception ratio, and overall effectiveness. By comparing the rookie quarterback ratings to those of their predecessors, we can acquire useful insights into their respective contributions on the field. Do these rookies have the capacity to rise to the level of experienced stars such as Mac Jones and Desmond Ridder? Or will they have difficulty adapting to the demands of the NFL?</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>QBStats <span class="ot">&lt;-</span> QBStats <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Player =</span> <span class="fu">reorder</span>(Player, <span class="st">`</span><span class="at">Completion %</span><span class="st">`</span>, <span class="at">FUN =</span> mean, <span class="at">order =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> Player, <span class="at">y =</span> <span class="st">`</span><span class="at">Completion %</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Team/School</span><span class="st">`</span>), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Comparison of Completion Percentages"</span>, <span class="at">x =</span> <span class="st">"Player"</span>, <span class="at">y =</span> <span class="st">"Completion Percentage (%)"</span>) <span class="sc">+</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> team_colors) <span class="sc">+</span>  <span class="co"># Use custom colors</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>QBStats <span class="ot">&lt;-</span> QBStats <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Player =</span> <span class="fu">reorder</span>(Player, Rating))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> Player, <span class="at">xend =</span> Player, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> Rating, <span class="at">color =</span> <span class="st">`</span><span class="at">Team/School</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> Player, <span class="at">y =</span> Rating, <span class="at">color =</span> <span class="st">`</span><span class="at">Team/School</span><span class="st">`</span>), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> team_colors) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Quarterback Ratings"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Comparing Quarterback Ratings Across Players"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Quarterback"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Rating"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Sports Reference | By: Jack Shaw"</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -255,6 +281,66 @@ dbl (10): Games, Completions, Attempts, Completion %, Yards, Yards/Attempt, ...
 </div>
 </div>
 </div>
+<p>This comparison of quarterback ratings clearly delineates the high ceiling of rookies like Caleb Williams and JJ McCarthy. Their high ratings suggest that they are well-prepared to make an immediate impact. This could be particularly crucial for teams like the Vikings and Broncos looking for a fresh start under center.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Yards/Attempt</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">Completion %</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Team/School</span><span class="st">`</span>), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> team_colors) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Yards/Attempt</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">Completion %</span><span class="st">`</span>, <span class="at">label =</span> Player), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">hjust =</span> <span class="fl">1.15</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Yards per Attempt vs Completion Percentage"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Analyzing Quarterback Performance in Passing Efficiency"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Yards per Attempt"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Completion Percentage"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Sports Reference | By: Jack Shaw"</span>) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Focusing on passing efficiency, this graph reveals interesting contrasts in styles. Bo Nix and Jayden Daniels show high completion percentages coupled with aggressive yards per attempt, positioning them as likely efficient passers for their teams. The data implies that these players could offer reliable, high-impact passing options compared to some incumbents like Russell Wilson and Kirk Cousins, who exhibit less efficiency in these metrics.</p>
+<p><strong>TD to INT Ratio and Adjusted Yards/Attempt: Exploring Efficiency</strong></p>
+<p>In the pursuit of quarterback brilliance, a balance between touchdown passes and interceptions is critical. This measure, along with adjusted yards per attempt, which takes into account the quality of each passing attempt, provides a more sophisticated picture of quarterback efficiency. What are the rookie quarterbacks’ touchdown-to-interception ratios and adjusted yards per attempt compared to their predecessors? Is there evidence of future success or room for growth in their performance?</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>QBStats <span class="ot">&lt;-</span> QBStats <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TD_INT_Ratio =</span> TDs <span class="sc">/</span> Interceptions)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> TD_INT_Ratio, <span class="at">y =</span> <span class="st">`</span><span class="at">Adjusted Yards/Attempt</span><span class="st">`</span>, <span class="at">size =</span> Interceptions, <span class="at">color =</span> <span class="st">`</span><span class="at">Team/School</span><span class="st">`</span>), <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> team_colors) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"TD to INT Ratio vs Adjusted Yards/Attempt"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Comparison of TD to INT Ratio and Adjusted Yards/Attempt for Quarterbacks"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"TD/INT Ratio"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Adjusted Yards/Attempt"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"Interceptions"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Team"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Sports Reference | By: Jack Shaw"</span>) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data =</span> QBStats, <span class="fu">aes</span>(<span class="at">x =</span> TD_INT_Ratio, <span class="at">y =</span> <span class="st">`</span><span class="at">Adjusted Yards/Attempt</span><span class="st">`</span>, <span class="at">label =</span> Player), </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">box.padding =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"lines"</span>), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This chart provides a comparison between the touchdown-to-interception (TD/INT) ratio and adjusted yards per attempt for each quarterback, highlighting both the rookies and their predecessors. Notably, Caleb Williams stands out with an impressive combination of high adjusted yards per attempt and a strong TD/INT ratio, suggesting a potentially transformative impact for the Bears. Jayden Daniels also shows promise with similar metrics, potentially providing a significant upgrade for the Falcons.</p>
+<p><strong>General Analysis</strong></p>
+<p>Across the charts, the rookies, especially Caleb Williams, Bo Nix, and Jayden Daniels, show metrics that either meet or exceed those of their more seasoned counterparts. This bodes well for their teams, suggesting that the draft picks might pay off quicker than expected, with potential immediate impacts on the field.</p>
+<p>This narrative structure should give your readers a clear understanding of the metrics and how these relate to both individual and team prospects, driving home the significance of these first-round picks.</p>
 
 
 
